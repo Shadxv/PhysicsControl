@@ -3,7 +3,5 @@ include 'api'
 include 'core'
 include 'text-adventure'
 include 'text-bungee'
-include 'versions-adapter-1_8-1_12_2'
-include 'versions-adapter-1_13-1_20_4'
-include 'versions-adapter-1_20_5-and-more'
+include 'versions-adapter'
 

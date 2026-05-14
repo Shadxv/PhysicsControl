@@ -26,7 +26,7 @@ public final class PControlTriggerInventory extends PControlInventory {
     private static final boolean WARN_ON_SET_ICONS_FOR_UNAVAILABLE_TRIGGERS = false;
     private static final ItemStack DISALLOWED_TRIGGER = new ItemStack(Material.BARRIER);
     private static final ItemStack WRONG_ICON_TRIGGER = new ItemStack(Material.PAPER);
-    private static final PCMaterial BACK_ITEM_MATERIAL = PCMaterial.ofLegacyOrModern("WOOL:14", "RED_WOOL");
+    private static final PCMaterial BACK_ITEM_MATERIAL = PCMaterial.valueOf("RED_WOOL");
 
     private final PControlDataBukkit data;
     private final Map<PControlTrigger, Short> slotByTrigger;

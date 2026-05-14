@@ -42,20 +42,13 @@ public final class CustomTags {
     }
 
     private void initSpecificTags() {
-        this.initBlocksSet("world_air", set -> { // contains air
+        this.initBlocksSet("world_air", set -> {
             set.addPrimitive(Material.AIR);
-            if (this.data.hasVersion(1, 13, 0)) {
-                set.addPrimitive(Material.CAVE_AIR);
-            }
+            set.addPrimitive(Material.CAVE_AIR);
         });
-        this.initBlocksSet("gravity_blocks", set -> { // search using predicate
+        this.initBlocksSet("gravity_blocks", set -> {
             set.add(Material::hasGravity);
-            if (!this.data.hasVersion(1, 13, 0)) {
-                set.addPrimitive(Material.DRAGON_EGG);
-            }
-            if (this.data.hasVersion(1, 14, 0)) {
-                set.addPrimitive(Material.SCAFFOLDING);
-            }
+            set.addPrimitive(Material.SCAFFOLDING);
         });
     }
 

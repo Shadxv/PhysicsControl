@@ -121,7 +121,27 @@ org/bukkit/event/entity/EntityChangeBlockEvent:
     non-falling-from: "#physicscontrol_wooden_doors"
   15:
     trigger: "IGNORED_STATE" # Boats destroys lilies
-    non-falling-by: "boat"
+    non-falling-by:
+      - "oak_boat"
+      - "birch_boat"
+      - "spruce_boat"
+      - "jungle_boat"
+      - "acacia_boat"
+      - "dark_oak_boat"
+      - "mangrove_boat"
+      - "cherry_boat"
+      - "pale_oak_boat"
+      - "bamboo_raft"
+      - "oak_chest_boat"
+      - "birch_chest_boat"
+      - "spruce_chest_boat"
+      - "jungle_chest_boat"
+      - "acacia_chest_boat"
+      - "dark_oak_chest_boat"
+      - "mangrove_chest_boat"
+      - "cherry_chest_boat"
+      - "pale_oak_chest_boat"
+      - "bamboo_chest_raft"
   16:
     trigger: "SHEEPS_EATING_GRASS"
     non-falling-by: "sheep"

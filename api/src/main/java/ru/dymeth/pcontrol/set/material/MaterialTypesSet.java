@@ -96,6 +96,6 @@ public final class MaterialTypesSet extends KeyedEnumSet<Material, PCMaterial> {
         if (!MaterialUtils.isValidMaterial(enumValue, this.allowAir)) {
             throw new IllegalArgumentException("Unable to add air material to non-air materials set (" + enumValue + ")");
         }
-        return elementName == null ? new PCMaterial(enumValue, null) : PCMaterial.valueOf(elementName);
+        return elementName == null ? new PCMaterial(enumValue) : PCMaterial.valueOf(elementName);
     }
 }

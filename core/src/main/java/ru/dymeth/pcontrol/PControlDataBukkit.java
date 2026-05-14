@@ -31,9 +31,7 @@ import ru.dymeth.pcontrol.util.update.data.PluginDataUpdater;
 import ru.dymeth.pcontrol.util.update.jar.PaperPluginUpdater;
 import ru.dymeth.pcontrol.util.update.jar.PluginUpdater;
 import ru.dymeth.pcontrol.util.update.jar.SpigotPluginUpdater;
-import ru.dymeth.pcontrol.versionsadapter.VersionsAdapter_1_13_to_1_20_4;
-import ru.dymeth.pcontrol.versionsadapter.VersionsAdapter_1_20_5_and_more;
-import ru.dymeth.pcontrol.versionsadapter.VersionsAdapter_1_8_to_1_12_2;
+import ru.dymeth.pcontrol.versionsadapter.VersionsAdapterImpl;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -108,35 +106,13 @@ public final class PControlDataBukkit implements PControlData {
 
     @Nonnull
     private VersionsAdapter createVersionsAdapter() {
-        if (!this.hasVersion(1, 13, 0)) {
-            return new VersionsAdapter_1_8_to_1_12_2(this);
-        } else if (!this.hasVersion(1, 20, 5)) {
-            return new VersionsAdapter_1_13_to_1_20_4(this);
-        } else {
-            return new VersionsAdapter_1_20_5_and_more(this);
-        }
+        return new VersionsAdapterImpl(this);
     }
 
     private void validateServerVersions() {
-        try {
-            if (!this.serverVersion.hasVersion(1, 0, 0)
-                || this.serverVersion.hasVersion(2, 0, 0)
-            ) {
-                throw new IllegalArgumentException("Wrong major version");
-            }
-            if (!this.serverVersion.hasVersion(1, 8, 0)) {
-                throw new IllegalArgumentException("Too old version. Minimal is 1.8");
-            }
-            // Legacy complex materials like WOOL no more present in 1.13-1.13.1, but Spigot still have no Tag class.
-            // Therefore, there is no easy way to get material sets in 1.13-1.13.1
-            if (this.serverVersion.hasVersion(1, 13, 0)
-                && !this.serverVersion.hasVersion(1, 13, 2)
-            ) {
-                throw new IllegalArgumentException("1.13(.0) and 1.13.1 are unsupported");
-            }
-        } catch (Exception e) {
+        if (!this.serverVersion.hasVersion(26, 1, 2)) {
             throw new RuntimeException("Unsupported server version (" + this.serverVersion + "). "
-                + "It must be 1.8-1.12.2 or 1.13.2 and newer", e);
+                + "Minimum required version is 26.1.2");
         }
     }
 

@@ -10,7 +10,6 @@ import ru.dymeth.pcontrol.data.trigger.EventsListenerParser;
 import ru.dymeth.pcontrol.data.trigger.PControlTrigger;
 import ru.dymeth.pcontrol.rules.single.MaterialRules;
 import ru.dymeth.pcontrol.util.LocationUtils;
-import ru.dymeth.pcontrol.util.ReflectionUtils;
 
 import javax.annotation.Nonnull;
 
@@ -20,45 +19,16 @@ public class BlockPhysicsEventListener extends PhysicsListener {
     private final MaterialRules rulesBlockPhysicsEventFrom = new MaterialRules(
         this.data, BlockPhysicsEvent.class, "from");
 
-    private final boolean legacyBlockPhysicsEvent = !this.data.hasVersion(1, 13, 0);
-    private final boolean modernBlockPhysicsEvent = ReflectionUtils.isMethodPresent(BlockPhysicsEvent.class, "getSourceBlock");
-
     public BlockPhysicsEventListener(@Nonnull PControlData data, @Nonnull EventsListenerParser parser) {
         super(data);
         parser.registerParser(this.rulesBlockPhysicsEventFrom);
-    }
-
-    @Override
-    protected void unregisterUnavailableTriggers() {
-        if (!this.legacyBlockPhysicsEvent && !this.modernBlockPhysicsEvent) {
-            this.rulesBlockPhysicsEventFrom.unregisterAll();
-        }
     }
 
     @SuppressWarnings("ConcatenationWithEmptyString")
     @EventHandler(ignoreCancelled = true)
     private void on(BlockPhysicsEvent event) {
         Block block = event.getBlock();
-
-        if (this.legacyBlockPhysicsEvent) {
-            if (DEBUG) {
-                this.debugAction(event, block.getLocation(), ""
-                    + "block=" + block.getType() + ";"
-                    + "changed=" + event.getChangedType() + ";"
-                );
-            }
-            PControlTrigger trigger = this.rulesBlockPhysicsEventFrom.findTrigger(block.getType());
-            if (trigger != null) {
-                this.data.cancelIfDisabled(event, trigger);
-            }
-            return;
-        }
-
-        if (!this.modernBlockPhysicsEvent) {
-            return;
-        }
-
-        Block source = event.getSourceBlock(); // Not supported on Spigot 1.13 and 1.13.1
+        Block source = event.getSourceBlock();
 
         if (DEBUG) {
             this.debugAction(event, block.getLocation(), ""

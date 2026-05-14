@@ -104,6 +104,6 @@ public final class BlockTypesSet extends KeyedEnumSet<Material, PCMaterial> {
         if (!MaterialUtils.isBlockMaterial(enumValue, this.allowAir)) {
             throw new IllegalArgumentException("Unable to add non-block material to blocks set (" + enumValue + ")");
         }
-        return elementName == null ? new PCMaterial(enumValue, null) : PCMaterial.valueOf(elementName);
+        return elementName == null ? new PCMaterial(enumValue) : PCMaterial.valueOf(elementName);
     }
 }

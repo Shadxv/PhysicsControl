@@ -25,10 +25,6 @@ public class MinecraftVersion {
             this.serverMinorVersion = this.parseVersionSection(sections[1], "minor");
             this.serverPatchVersion = sections.length == 2 ? 0 : this.parseVersionSection(sections[2], "patch");
 
-            if (this.serverMajorVersion != 1) {
-                throw new IllegalArgumentException("Unsupported major version: " + this.serverMajorVersion);
-            }
-
         } catch (Exception e) {
             throw new RuntimeException("Unsupported server version", e);
         }

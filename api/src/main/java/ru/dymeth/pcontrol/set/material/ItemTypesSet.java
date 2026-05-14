@@ -97,6 +97,6 @@ public final class ItemTypesSet extends KeyedEnumSet<Material, PCMaterial> {
         if (!MaterialUtils.isItemMaterial(enumValue, this.allowAir)) {
             throw new IllegalArgumentException("Unable to add non-item material to items set (" + enumValue + ")");
         }
-        return elementName == null ? new PCMaterial(enumValue, null) : PCMaterial.valueOf(elementName);
+        return elementName == null ? new PCMaterial(enumValue) : PCMaterial.valueOf(elementName);
     }
 }
